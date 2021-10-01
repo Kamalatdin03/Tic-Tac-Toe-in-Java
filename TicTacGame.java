@@ -1,3 +1,5 @@
+import java.util.concurrent.LinkedBlockingQueue;
+
 public class TicTacGame
 {
 	private int _moveCount;
@@ -67,7 +69,7 @@ public class TicTacGame
 
 	public void renderBoard()
   	{
-	  	String text = "";
+	  	StringBuilder text = new StringBuilder();
 	  	int x = 0, y = 0;
 
 		Cell[][] board = _board.getBoard();
@@ -76,14 +78,14 @@ public class TicTacGame
 		{
 			for (int j = 0; j < (_boardSize * 4 + 1); j++)
 			{
-				if (i % 2 == 0) text += "-";
+				if (i % 2 == 0) text.append("-");
 				else
 				{
-					if (j % 4 == 0) text += "|";
+					if (j % 4 == 0) text.append("|");
 					else
 					{
-						if (j % 2 == 0) text += board[y][x++].toString();
-						else text += " ";
+						if (j % 2 == 0) text.append(board[y][x++]);
+						else text.append(" ");
 					}
 				}
 			}
@@ -91,7 +93,7 @@ public class TicTacGame
 			if (i % 2 != 0) y++;
 			x = 0;
 
-			text += "\n";
+			text.append("\n");
 		}
 
 		System.out.println(text);
